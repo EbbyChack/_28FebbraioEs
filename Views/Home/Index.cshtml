@@ -1,0 +1,18 @@
+﻿@model List<_28FebbraioEs.Models.Prodotto>
+
+<div class="row justify-content-start">
+    @foreach (var prodotto in Model)
+    {
+        <div class="col-3">
+            <div class="card">
+                <img class="card-img-top" src="@prodotto.ImmaginePrincipale" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
+                <div class="card-body">
+                    <h5 class="card-title">@prodotto.NomeArticolo</h5>
+                    <p class="card-text">@prodotto.Descrizione</p>
+                    <p class="card-text"><strong>Price:</strong> @prodotto.Prezzo</p>
+                    <a href="#" class="btn btn-light">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
