@@ -3,14 +3,15 @@
 <div class="row justify-content-start">
     @foreach (var prodotto in Model)
     {
-        <div class="col-3">
-            <div class="card">
+        <div class="col-3 g-3">
+            <div class="card border border-3 border-light">
                 <img class="card-img-top" src="@prodotto.ImmaginePrincipale" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
-                <div class="card-body">
+                <div class="card-body bg-light">
                     <h5 class="card-title">@prodotto.NomeArticolo</h5>
                     <p class="card-text">@prodotto.Descrizione</p>
                     <p class="card-text"><strong>Price:</strong> @prodotto.Prezzo</p>
-                    <a href="#" class="btn btn-light">Go somewhere</a>
+                    <div class="d-flex justify-content-center"> <a href="#" class="btn btn-dark">Elimina</a></div>
+                   
                 </div>
             </div>
         </div>
