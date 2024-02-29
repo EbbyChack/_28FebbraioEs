@@ -1,0 +1,15 @@
+﻿@model _28FebbraioEs.Models.Prodotto
+
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <img src="@Model.ImmaginePrincipale" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
+        <img src="@Model.ImmagineAgg1" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
+        <img src="@Model.ImmagineAgg2" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
+    </div>
+   
+    <div>
+        <h5 class="card-title">@Model.NomeArticolo</h5>
+        <p class="card-text">@Model.Descrizione</p>
+        <p class="card-text"><strong>Price:</strong> @Model.Prezzo</p>
+    </div>
+</div>

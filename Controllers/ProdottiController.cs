@@ -54,5 +54,44 @@ namespace _28FebbraioEs.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Dettagli(int? id)
+        {
+            if (id.HasValue)
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString;
+                Prodotto prodotto = new Prodotto();
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Product WHERE Id = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        SqlDataReader rdr = cmd.ExecuteReader();
+
+                        if (rdr.Read())
+                        {
+                            prodotto.Id = (int)rdr["Id"];
+                            prodotto.NomeArticolo = (string)rdr["NomeArticolo"];
+                            prodotto.Prezzo = (string)rdr["Prezzo"];
+                            prodotto.Descrizione = (string)rdr["Descrizione"];
+                            prodotto.ImmaginePrincipale = (string)rdr["ImmaginePrincipale"];
+                            prodotto.ImmagineAgg1 = (string)rdr["ImmagineAgg1"];
+                            prodotto.ImmagineAgg2 = (string)rdr["ImmagineAgg2"];
+                        }
+                    }
+                }
+
+                return View(prodotto);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
     }
 }

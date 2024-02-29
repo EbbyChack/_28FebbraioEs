@@ -30,6 +30,7 @@ namespace _28FebbraioEs.Controllers
                     {
                         Prodotto prodotto = new Prodotto();
                         
+                        prodotto.Id = (int)rdr["Id"];
                         prodotto.NomeArticolo = (string)rdr["NomeArticolo"];
                         prodotto.Prezzo = (string)rdr["Prezzo"];
                         prodotto.Descrizione = (string)rdr["Descrizione"];
@@ -44,6 +45,26 @@ namespace _28FebbraioEs.Controllers
             
         }
 
-       
+        [HttpPost]
+        public ActionResult Elimina(int id)
+        {
+            
+            string connectionString = ConfigurationManager.ConnectionStrings["MyDb"].ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "UPDATE Product SET Attivo = 0 WHERE Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

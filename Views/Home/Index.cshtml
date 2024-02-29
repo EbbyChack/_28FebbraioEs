@@ -3,17 +3,31 @@
 <div class="row justify-content-start">
     @foreach (var prodotto in Model)
     {
+
         <div class="col-3 g-3">
             <div class="card border border-3 border-light">
-                <img class="card-img-top" src="@prodotto.ImmaginePrincipale" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
+                <a href="@Url.Action("Dettagli", "Prodotti", new { id = prodotto.Id })">
+                    <img class="card-img-top" src="@prodotto.ImmaginePrincipale" alt="Card image cap" style="width:300px; height:300px; object-fit:contain">
+                </a>
                 <div class="card-body bg-light">
                     <h5 class="card-title">@prodotto.NomeArticolo</h5>
                     <p class="card-text">@prodotto.Descrizione</p>
                     <p class="card-text"><strong>Price:</strong> @prodotto.Prezzo</p>
-                    <div class="d-flex justify-content-center"> <a href="#" class="btn btn-dark">Elimina</a></div>
-                   
+                    @if (Request.Cookies["UserType"] != null && Request.Cookies["UserType"].Value == "admin")
+                    {
+                        <div class="d-flex justify-content-center">
+                            <form method="post" action="@Url.Action("Elimina", "Home")">
+                                <input type="hidden" name="id" value="@prodotto.Id" />
+                                <input type="submit" value="Elimina" class="btn btn-dark" />
+                            </form>
+                        </div>
+                    }
+
+
                 </div>
             </div>
         </div>
+
+
     }
 </div>
